@@ -1,0 +1,7 @@
+fullData/
+Bangyi_CompiledData~/
+Bernice_compiled_years~/
+*.zip
+node_modules
+__pycache__/
+venv
