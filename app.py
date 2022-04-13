@@ -15,7 +15,7 @@ model = RandomForestClassificationModel.load("/model")
 
 @app.route('/')
 def home():
-    return "<p>Hello, World!</p>"
+    return "<p>Hello!</p>"
 
 @app.route('/predict/<value_list>', methods=['GET'])
 def predict(value_list):
@@ -31,9 +31,12 @@ def predict(value_list):
     df = spark.createDataFrame([tuple(arr_value)], inputCols)
     featuresMLData = assembler.transform(df)
     prediction_result = model.predict(featuresMLData.head().features)
-    return jsonify(
+    print(prediction_result)
+    response = jsonify(
         value_input=value_list,
         result=prediction_result
     )
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0')
