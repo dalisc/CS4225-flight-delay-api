@@ -8,9 +8,7 @@ from pyspark.ml.feature import VectorAssembler
 app = Flask(__name__)
 
 spark = SparkSession.builder.appName("FlightDelayPrediction").getOrCreate()
-sc = spark.sparkContext
-    # .config("spark.some.config.option", "some-value") \
-    
+sc = spark.sparkContext    
 model = RandomForestClassificationModel.load("/model")
 
 @app.route('/')
